@@ -7,8 +7,7 @@ from typing import Any
 from typing import cast
 from typing import Optional
 
-from vector_initializers.vector_initializer import VectorInitializer
-from vector_initializers.zero_initializer import ZeroInitializer
+from vector_initializers.vector_initializer import VectorInitializer, ZeroInitializer
 
 _EPS = 1e-8
 _MEAN_MAX = 1e32
