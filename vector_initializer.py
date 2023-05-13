@@ -55,7 +55,7 @@ class ZeroInitializer(VectorInitializer):
         return np.zeros(length)
 
 
-class ReverseSquareInitializer(VectorInitializer):
+class ReverseSquareRootInitializer(VectorInitializer):
     """Initialize each element of the vector with reverse square of population size"""
 
     def initialize_vector(self, length, pop_size):
