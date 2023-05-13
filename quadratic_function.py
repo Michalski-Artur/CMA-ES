@@ -1,9 +1,7 @@
 import numpy as np
 
-from cmaes.cma import CMA
-from vector_initializers.vector_initializer import \
-    XavierInitializer, HeInitializer, ZeroInitializer, ConstInitializer, RandomInitializer
-
+from cma import CMA
+from vector_initializer import XavierInitializer
 
 def quadratic(x1, x2):
     return (x1 - 3) ** 2 + (10 * (x2 + 2)) ** 2
