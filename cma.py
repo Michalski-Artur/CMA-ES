@@ -166,7 +166,7 @@ class CMA:
         self._weights = weights
 
         # evolution path
-        self._p_sigma = vector_initializer.initialize_vector(n_dim, population_size)
+        self._p_sigma = vector_initializer().initialize_vector(n_dim, population_size)
         self._pc = np.zeros(n_dim)
 
         self._mean = mean.copy()
@@ -197,6 +197,9 @@ class CMA:
 
         self._funhist_term = 10 + math.ceil(30 * n_dim / population_size)
         self._funhist_values = np.empty(self._funhist_term * 2)
+
+
+        self._best = None
 
     def __getstate__(self) -> dict[str, Any]:
         attrs = {}
@@ -300,10 +303,15 @@ class CMA:
         self._g += 1
         solutions.sort(key=lambda s: s[1])
 
+        # Store the best solution
+        best_solution = solutions[0]
+        if self._best is None or best_solution[1] < self._best[1]:
+            self._best = best_solution
+
         # Stores 'best' and 'worst' values of the
         # last 'self._funhist_term' generations.
         funhist_idx = 2 * (self.generation % self._funhist_term)
-        self._funhist_values[funhist_idx] = solutions[0][1]
+        self._funhist_values[funhist_idx] = best_solution[1]
         self._funhist_values[funhist_idx + 1] = solutions[-1][1]
 
         # Sample new population of search_points, for k=1, ..., popsize
